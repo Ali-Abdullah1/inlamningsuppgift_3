@@ -72,6 +72,9 @@ public class Brickor_15_Spel extends JFrame implements ActionListener {
         }
         if (isValidMove(emptyIndex, clickedIndex)) {
             swapButtons(clickedIndex, emptyIndex);
+            if (hasWon()){
+                JOptionPane.showMessageDialog(this, "Du har vunnit!");
+            }
         }
     }
 
@@ -84,6 +87,14 @@ public class Brickor_15_Spel extends JFrame implements ActionListener {
         String tempText = buttons[from].getText();
         buttons[from].setText(buttons[to].getText());
         buttons[to].setText(tempText);
+    }
+    private boolean hasWon() {
+        for (int i = 0; i < puzzle.length - 1; i++) {
+            if (!buttons[i].getText().equals(String.valueOf(puzzle[i]))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private void shufflePuzzleNumbers() {

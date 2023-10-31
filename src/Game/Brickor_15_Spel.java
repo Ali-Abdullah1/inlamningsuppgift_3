@@ -12,6 +12,7 @@ public class Brickor_15_Spel extends JFrame implements ActionListener {
     JButton[] buttons = new JButton[16];
     int[] puzzle = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 0};
     JButton shuffle = new JButton("Blanda");
+    JButton solve = new JButton("Lös");
     JPanel game = new JPanel();
 
 
@@ -27,7 +28,7 @@ public class Brickor_15_Spel extends JFrame implements ActionListener {
             }
 
             Font buttonFont = buttons[i].getFont(); // kosmetiska saker
-            buttons[i].setFont(buttonFont.deriveFont(18f));
+            buttons[i].setFont(buttonFont.deriveFont(40f));
             buttons[i].setBackground(new Color(255, 248, 220));
             buttons[i].setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
             buttons[i].setBorder(new LineBorder(Color.BLACK));
@@ -39,7 +40,10 @@ public class Brickor_15_Spel extends JFrame implements ActionListener {
         }
 
         add(game, BorderLayout.CENTER);
-        add(shuffle, BorderLayout.SOUTH);
+        JPanel panel = new JPanel();
+        panel.add(shuffle);
+        panel.add(solve);
+        add(panel, BorderLayout.SOUTH);
 
 
         setSize(800, 600);
@@ -49,7 +53,7 @@ public class Brickor_15_Spel extends JFrame implements ActionListener {
         setVisible(true);
 
         shuffle.addActionListener(e -> shufflePuzzleNumbers());
-
+        solve.addActionListener(e -> solvePuzzle());
     }
 
     public static void main(String[] args) {
@@ -94,6 +98,9 @@ public class Brickor_15_Spel extends JFrame implements ActionListener {
                 return false;
             }
         }
+        if (!buttons[0].getText().equals("1") || !buttons[15].getText().equals(" ")) {
+            return false;
+        }
         return true;
     }
 
@@ -114,6 +121,19 @@ public class Brickor_15_Spel extends JFrame implements ActionListener {
         }
         puzzle[15] = 0;
         buttons[15].setText(" ");
+    }
+    private void solvePuzzle() {
+        for (int i = 0; i < puzzle.length; i++) {
+            if (i == puzzle.length - 1) {
+                puzzle[i] = 0;
+                buttons[i].setText(" ");
+
+            } else {
+                puzzle[i] = i + 1;
+                buttons[i].setText(String.valueOf(i + 1));
+
+            }
+        }
     }
 }
 

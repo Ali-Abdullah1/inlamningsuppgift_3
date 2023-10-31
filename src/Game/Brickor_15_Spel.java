@@ -98,7 +98,7 @@ public class Brickor_15_Spel extends JFrame implements ActionListener {
                 return false;
             }
         }
-        if (!buttons[0].getText().equals("1") || !buttons[15].getText().equals(" ")) {
+        if (!buttons[0].getText().equals("1") || !buttons[15].getText().equals(" ") || !buttons[3].getText().equals("4")|| !buttons[7].getText().equals("8")) {
             return false;
         }
         return true;
